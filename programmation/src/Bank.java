@@ -4,11 +4,12 @@ public class Bank {
          private String code;
 
         // Constructeur
-        public Bank( String code) {
-            this.code = code;
-        }
 
-        // getters
+    public Bank( String code) {
+        this.code = code;
+    }
+
+    // getters
         public String getCode() {
             return code;
         }
