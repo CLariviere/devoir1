@@ -6,7 +6,7 @@ public class BankAccount extends Branch {
     private int amount;
 
     //Constructeur
-    public BankAccount(int number, int amount){
+    public BankAccount(int transit, int number, int amount){
         this.number=number;
         this.amount=amount;
     }
