@@ -1,13 +1,12 @@
 public class Branch extends Bank {
     //instances des succursales, gestion des comptes
-
+    //TODO trouver un moyen de garder en mémoire les numéros de branches, un array?
     //Atributs
     private int transit;
 
     //Constructeur
-    public BankAccount(int transit, int number, int amount){
-        super (number, amount)
-        this.transit=transit;
+    public Branch(int transit) {
+        super();
     }
 
 
