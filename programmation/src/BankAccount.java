@@ -2,15 +2,12 @@ public class BankAccount extends Branch {
     //instance de comptes
 
     //Atributs
-    private int number;
-    private int amount;
+    private String transit, number;
 
     //Constructeur
-    public BankAccount(int transit, int number, int amount){
+    public BankAccount(String transit, String number){
+        this.transit=transit;
         this.number=number;
-        this.amount=amount;
-    }
-    public void transaction(){
-        //transaction avec les codes deposit withdraw bonus
+        int amount=0;
     }
 }
