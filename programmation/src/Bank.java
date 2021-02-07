@@ -9,63 +9,70 @@ public class Bank {
     }
 
     public void processTransaction(String line) {
+        String[] lineSplit = line.split(" ");
     //verfier si code .equals ds la line.
-        if (line.substring(0,5).equals("build")) {
-            String transit = line.substring(6,11);
+        if (lineSplit[0].equals("build")) {
+            String transit = lineSplit[1];
             branches[compteurBranche] = new Branch(transit);
             compteurBranche++;
         };
-        if (line.substring(0,9).equals("dismantle")) {
-            String transit = line.substring(10,15);
+        if (lineSplit[0].equals("dismantle")) {
+            String transit = lineSplit[1];
             int i=0;
-            while (i < compteurBranche & !transit.equals(branches[i].getTransit())) {
-                i++;
+            while (i < compteurBranche & branches[i]!=null) {
+                if (!transit.equals(branches[i].getTransit()) & branches[i]!=null){
+                i++;}
             }
             branches[i] = null;
         };
-        if (line.substring(0,4).equals("open")) {
-            String transit = line.substring(5,10);
-            String number = line.substring(11,18);
+        if (lineSplit[0].equals("open")) {
+            String transit = lineSplit[1];
+            String number = lineSplit[2];
             int i=0;
             while (i < compteurBranche & !transit.equals(branches[i].getTransit())) {
                 i++;
             }
+            //TODO ajouter condition si branche inexistante
             branches[i].openAccount(number);
         };
-        if (line.substring(0,5).equals("close")) {
-            String transit = line.substring(6,11);
-            String number = line.substring(12,19);
+        if (lineSplit[0].equals("close")) {
+            String transit = lineSplit[1];
+            String number = lineSplit[2];
             int i=0;
             while (i < compteurBranche & !transit.equals(branches[i].getTransit())) {
                 i++;
             }
+            //TODO ajouter condition si bankAccount inexistant
             branches[i].closeAccount(number);
         };
-        if (line.substring(0,7).equals("deposit")) {
-            String transit = line.substring(8,13);
-            String number = line.substring(14,21);
-            float deposit = Float.parseFloat(line.substring(22, line.length()));
-            BankAccount.setAmount(deposit);
-
-
-        };
-        if (line.substring(0,8).equals("withdraw")) {
-            String transit = line.substring(9,14);
-            String number = line.substring(15,22);
-            //on met amount negatif pour un retrait
-            float amount = -(Float.parseFloat(line.substring(22, line.length())));
-        };
-        if (line.substring(0,5).equals("bonus")) {
+        if (lineSplit[0].equals("deposit")) {
+            String transit = lineSplit[1];
+            String number = lineSplit[2];
+            float deposit = Float.parseFloat(lineSplit[3]);
+            BankAccount.setDeposit(deposit);
+            //TODO ajouter condition si branch/bankAccount inexistant
 
         };
-        if (line.substring(0,6).equals("report")) {
+        if (lineSplit[0].equals("withdraw")) {
+            String transit = lineSplit[1];
+            String number = lineSplit[2];
+            float withdraw = Float.parseFloat(lineSplit[3]);
+            BankAccount.setWithdraw(withdraw);
+            //TODO ajouter condition si branch/bankAccount inexistant
+        };
+        if (lineSplit[0].equals("bonus")) {
+            float bonus = Float.parseFloat(lineSplit[1]);
+            //TODO modifie la commande bonus
+            BankAccount.setAmount(bonus);
+
+        };
+        if (lineSplit[0].equals("report")) {
             //imprime le rapport
         };
-        if (line.substring(0,5).equals("short")) {
+        if (lineSplit[0].equals("short")) {
             //imprime le rapport court
             System.out.println("short-report");
         };
 
     }
-
 }

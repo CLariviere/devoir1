@@ -23,11 +23,12 @@ public class Branch{
     }
     public void closeAccount(String number){
         int i=0;
-        while (i < compteurAccount & !number.equals(accounts[i].getNumber())) {
+        while (i < compteurAccount & accounts[i]!=null){
+            if (!number.equals(accounts[i].getNumber()) & accounts[i]!=null) {
             i++;
         }
         accounts[i] = null;
+        }
     }
 
 }
-
