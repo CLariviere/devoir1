@@ -2,7 +2,8 @@ public class Branch{
     //instances des succursales, gestion des comptes
 
     //Atributs
-    private String transit;
+    private String transit, number;
+    private BankAccount[] accounts = new BankAccount[100];
     private int compteurAccount;
 
     //Constructeur
@@ -10,8 +11,22 @@ public class Branch{
         this.transit=transit;
         this.compteurAccount=0;
     }
+
+    //getter
     public String getTransit() {
         return transit;
+    }
+
+    public void openAccount(String number){
+        accounts[compteurAccount] = new BankAccount(number);
+        compteurAccount++;
+    }
+    public void closeAccount(String number){
+        int i=0;
+        while (i < compteurAccount & !number.equals(accounts[i].getNumber())) {
+            i++;
+        }
+        accounts[i] = null;
     }
 
 }

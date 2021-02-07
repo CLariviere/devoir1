@@ -1,7 +1,6 @@
 public class Bank {
     //attributs
     private Branch[] branches = new Branch[100];
-    private BankAccount[] accounts = new BankAccount[100];
     private int compteurBranche;
 
     //constructeur
@@ -10,7 +9,7 @@ public class Bank {
     }
 
     public void processTransaction(String line) {
-    //verfier si code .equals ds la line. assigner int aux bonnes variables
+    //verfier si code .equals ds la line.
         if (line.substring(0,5).equals("build")) {
             String transit = line.substring(6,11);
             branches[compteurBranche] = new Branch(transit);
@@ -24,34 +23,49 @@ public class Bank {
             }
             branches[i] = null;
         };
-        if (line.substring(0).equals("open")) {
-            String transit = line.substring(6,11);
-            String number = line.substring(12,20);
-            BankAccount bankAccount = new BankAccount(transit, number);
+        if (line.substring(0,4).equals("open")) {
+            String transit = line.substring(5,10);
+            String number = line.substring(11,18);
+            int i=0;
+            while (i < compteurBranche & !transit.equals(branches[i].getTransit())) {
+                i++;
+            }
+            branches[i].openAccount(number);
         };
-        if (line.substring(0).equals("close")) {
-        };
-        if (line.substring(0).equals("deposit")) {
+        if (line.substring(0,5).equals("close")) {
             String transit = line.substring(6,11);
-            String number = line.substring(12,20);
-            int amount = (Integer.parseInt(line.substring(20)));
+            String number = line.substring(12,19);
+            int i=0;
+            while (i < compteurBranche & !transit.equals(branches[i].getTransit())) {
+                i++;
+            }
+            branches[i].closeAccount(number);
         };
-        if (line.substring(0).equals("withdraw")) {
-            String transit = line.substring(6,11);
-            String number = line.substring(12,20);
+        if (line.substring(0,7).equals("deposit")) {
+            String transit = line.substring(8,13);
+            String number = line.substring(14,21);
+            float deposit = Float.parseFloat(line.substring(22, line.length()));
+            BankAccount.setAmount(deposit);
+
+
+        };
+        if (line.substring(0,8).equals("withdraw")) {
+            String transit = line.substring(9,14);
+            String number = line.substring(15,22);
             //on met amount negatif pour un retrait
-            int amount = -(Integer.parseInt(line.substring(20)));
+            float amount = -(Float.parseFloat(line.substring(22, line.length())));
         };
-        if (line.substring(0).equals("bonus")) {
+        if (line.substring(0,5).equals("bonus")) {
+
         };
-        if (line.substring(0).equals("report")) {
+        if (line.substring(0,6).equals("report")) {
             //imprime le rapport
-            System.out.println("report");
         };
-        if (line.substring(0).equals("short-report")) {
+        if (line.substring(0,5).equals("short")) {
             //imprime le rapport court
             System.out.println("short-report");
         };
 
     }
+
 }
