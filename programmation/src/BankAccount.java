@@ -3,12 +3,14 @@ public class BankAccount{
 
     //Atributs
     private String number;
-    private static float amount;
+    private static float amount, bonus;
 
     //Constructeur
     public BankAccount(String number){
         this.number=number;
         this.amount=0;
+        this.bonus=0;
+
     }
 
     //Getter
@@ -18,34 +20,21 @@ public class BankAccount{
     public float getAmount() {return amount;}
 
     //Setter
-    public static void setAmount(float bonus) {
+    public static void setBonus(float bonus) {
         if (bonus>=0){
             amount=bonus;
         }
-        if (bonus<0){
-            //TODO enlever les print avant la remise
-            System.out.println("bonus invalide");
-        }
     }
+
     public static void setDeposit(float deposit) {
         if (deposit>=0){
         amount+=deposit;
-        System.out.println(amount);
         float lastDeposit=deposit;
-        }
-        if (deposit<0){
-            //TODO enlever les print avant la remise
-            System.out.println("On ne peut pas deposer moins que zero dollars");
         }
     }
     public static void setWithdraw(float withdraw) {
         if (amount>=withdraw & withdraw>0){
             amount-=withdraw;
-        }
-        if (amount<withdraw){
-            //TODO enlever les print avant la remise
-            System.out.println("fonds insuffisant");
             }
         }
-
 }

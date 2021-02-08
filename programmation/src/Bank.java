@@ -50,33 +50,33 @@ public class Bank {
             String transit = lineSplit[1];
             String number = lineSplit[2];
             float deposit = Float.parseFloat(lineSplit[3]);
-            //TODO ajouter condition si branch/bankAccount inexistant
-            BankAccount.setDeposit(deposit);
-
-
+            for (int i = 0; i < compteurBranche; i++) {
+                //condition qui s'assure que la branche existe
+                if (transit.equals(branches[i].getTransit())) Branch.verifyAccountDep(number, deposit);
+            }
         };
         if (lineSplit[0].equals("withdraw")) {
             String transit = lineSplit[1];
             String number = lineSplit[2];
             float withdraw = Float.parseFloat(lineSplit[3]);
-            //TODO ajouter condition si branch/bankAccount inexistant
-            BankAccount.setWithdraw(withdraw);
-
+            for (int i = 0; i < compteurBranche; i++) {
+                //condition qui s'assure que la branche existe
+                    if (transit.equals(branches[i].getTransit())) Branch.verifyAccountWith(number, withdraw);
+                }
         };
         if (lineSplit[0].equals("bonus")) {
             float bonus = Float.parseFloat(lineSplit[1]);
             //TODO modifie la commande bonus
-            BankAccount.setAmount(bonus);
+            BankAccount.setBonus(bonus);
 
         };
         if (lineSplit[0].equals("report")) {
-            //imprime le rapport
+            //TODO imprime le rapport
         };
         if (lineSplit[0].equals("short")) {
-            //imprime le rapport court
+            //TODO imprime le rapport court
             System.out.println("short-report");
         };
-
-        }
     }
+}
 
