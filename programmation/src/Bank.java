@@ -1,6 +1,6 @@
 public class Bank {
     //attributs
-    private Branch[] branches = new Branch[100];
+    private Branch[] branches = new Branch[100000];
     private int compteurBranche;
 
     //constructeur
@@ -72,6 +72,10 @@ public class Bank {
         };
         if (lineSplit[0].equals("report")) {
             //TODO imprime le rapport
+            //selon prof, faire des boucles pour passer dans les branches et les comptes
+            //pour aller chercher les montants. La banque appelle report sur ses branches, et les branches appellent report sur les comptes.
+            //Donc les comptes crée un rapport, et succursales crée un rapport
+
         };
         if (lineSplit[0].equals("short")) {
             //TODO imprime le rapport court
