@@ -2,30 +2,31 @@ public class BankAccount{
     //instance de comptes
 
     //Atributs
-    private String number;
+    private String number, lastOperation;
     private static float amount, bonus;
+    private static boolean status;
 
     //Constructeur
     public BankAccount(String number){
         this.number=number;
         this.amount=0;
         this.bonus=0;
-
+        this.lastOperation="";
+        this.status=true;
     }
+
+
 
     //Getter
     public String getNumber() {
         return number;
     }
     public float getAmount() {return amount;}
+    public static boolean getStatus() {return status;}
 
-    //Setter
-    public static void setBonus(float bonus) {
-        if (bonus>=0){
-            amount=bonus;
-        }
+    public static void setStatus() {
+        status=false;
     }
-
     public static void setDeposit(float deposit) {
         if (deposit>=0){
         amount+=deposit;
