@@ -4,7 +4,7 @@ public class Branch{
     //Atributs
     private String transit, number;
     private BankAccount[] accounts = new BankAccount[100];
-    private int compteurAccount;
+    private static int compteurAccount;
 
     //Constructeur
     public Branch(String transit) {
@@ -16,19 +16,20 @@ public class Branch{
     public String getTransit() {
         return transit;
     }
+    public static int getCompteurAccount(){return compteurAccount;}
 
     public void openAccount(String number){
         accounts[compteurAccount] = new BankAccount(number);
         compteurAccount++;
     }
     public void closeAccount(String number){
-        int i=0;
-        while (i < compteurAccount & accounts[i]!=null){
-            if (!number.equals(accounts[i].getNumber()) & accounts[i]!=null) {
-            i++;
-        }
-        accounts[i] = null;
+        for (int i = 0; i < compteurAccount; i++) {
+            //condition qui s'assure que le compte existe
+            if (number.equals(accounts[i].getNumber())){
+                accounts[i] = null;
+                compteurAccount--;
+            }
+
         }
     }
-
 }

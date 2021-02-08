@@ -20,6 +20,7 @@ public class Bank {
             String transit = lineSplit[1];
             int i=0;
             while (i < compteurBranche & branches[i]!=null) {
+                //condition qui s'assure que la branche existe
                 if (!transit.equals(branches[i].getTransit()) & branches[i]!=null){
                 i++;}
             }
@@ -28,37 +29,39 @@ public class Bank {
         if (lineSplit[0].equals("open")) {
             String transit = lineSplit[1];
             String number = lineSplit[2];
-            int i=0;
-            while (i < compteurBranche & !transit.equals(branches[i].getTransit())) {
-                i++;
+            for (int i = 0; i < compteurBranche; i++) {
+                //condition qui s'assure que la branche existe
+                    if (transit.equals(branches[i].getTransit())){
+                        branches[i].openAccount(number);
+                    }
             }
-            //TODO ajouter condition si branche inexistante
-            branches[i].openAccount(number);
         };
         if (lineSplit[0].equals("close")) {
             String transit = lineSplit[1];
             String number = lineSplit[2];
-            int i=0;
-            while (i < compteurBranche & !transit.equals(branches[i].getTransit())) {
-                i++;
+            for (int i = 0; i < compteurBranche; i++) {
+                //condition qui s'assure que la branche existe
+                if (transit.equals(branches[i].getTransit())){
+                    branches[i].closeAccount(number);
+                }
             }
-            //TODO ajouter condition si bankAccount inexistant
-            branches[i].closeAccount(number);
         };
         if (lineSplit[0].equals("deposit")) {
             String transit = lineSplit[1];
             String number = lineSplit[2];
             float deposit = Float.parseFloat(lineSplit[3]);
-            BankAccount.setDeposit(deposit);
             //TODO ajouter condition si branch/bankAccount inexistant
+            BankAccount.setDeposit(deposit);
+
 
         };
         if (lineSplit[0].equals("withdraw")) {
             String transit = lineSplit[1];
             String number = lineSplit[2];
             float withdraw = Float.parseFloat(lineSplit[3]);
-            BankAccount.setWithdraw(withdraw);
             //TODO ajouter condition si branch/bankAccount inexistant
+            BankAccount.setWithdraw(withdraw);
+
         };
         if (lineSplit[0].equals("bonus")) {
             float bonus = Float.parseFloat(lineSplit[1]);
@@ -74,5 +77,6 @@ public class Bank {
             System.out.println("short-report");
         };
 
+        }
     }
-}
+
