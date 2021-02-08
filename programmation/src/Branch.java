@@ -3,7 +3,7 @@ public class Branch{
 
     //Atributs
     private String transit, number;
-    private static BankAccount[] accounts = new BankAccount[100000];
+    private static BankAccount[] accounts = new BankAccount[100000];//TODO a modifie, si tableau trop petit, a copier dans un plus gros tableau
     private static int compteurAccount;
 
     //Constructeur

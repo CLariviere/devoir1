@@ -1,6 +1,6 @@
 public class Bank {
     //attributs
-    private Branch[] branches = new Branch[100000];
+    private Branch[] branches = new Branch[100000]; //TODO a modifie, si tableau trop petit, a copier dans un plus gros tableau
     private int compteurBranche;
 
     //constructeur
