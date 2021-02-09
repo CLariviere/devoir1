@@ -2,8 +2,8 @@ public class BankAccount{
     //instance de comptes
 
     //Atributs
-    private String number, lastOperation;
-    private static float amount, bonus;
+    private static String number, lastOperation;
+    private static float amount, bonus, lastOperationAmount;
     private static boolean status;
 
     //Constructeur
@@ -11,31 +11,34 @@ public class BankAccount{
         this.number=number;
         this.amount=0;
         this.bonus=0;
-        this.lastOperation="";
         this.status=true;
+        this.lastOperation="";
+        this.lastOperationAmount=0;
     }
-
-
 
     //Getter
-    public String getNumber() {
-        return number;
-    }
+    public String getNumber() {return number;}
+    public String getLastOperation() {return lastOperation;}
+    public Float getLastOperationAmount() {return lastOperationAmount;}
     public float getAmount() {return amount;}
     public static boolean getStatus() {return status;}
 
+    //Setter
     public static void setStatus() {
         status=false;
     }
     public static void setDeposit(float deposit) {
         if (deposit>=0){
-        amount+=deposit;
-        float lastDeposit=deposit;
+            amount+=deposit;
+            lastOperationAmount=deposit;
+            lastOperation="deposit";
         }
     }
     public static void setWithdraw(float withdraw) {
         if (amount>=withdraw & withdraw>0){
             amount-=withdraw;
+            lastOperationAmount=withdraw;
+            lastOperation="withdraw";
             }
         }
 }
