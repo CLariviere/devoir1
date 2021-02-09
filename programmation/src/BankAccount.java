@@ -7,10 +7,9 @@ public class BankAccount{
     private static boolean status;
 
     //Constructeur
-    public BankAccount(String number){
+    public BankAccount(String number, float bonus){
         this.number=number;
-        this.amount=0;
-        this.bonus=0;
+        this.amount=0+bonus;
         this.status=true;
         this.lastOperation="";
         this.lastOperationAmount=0;

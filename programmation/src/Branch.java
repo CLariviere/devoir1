@@ -18,18 +18,17 @@ public class Branch{
     }
     public static int getCompteurAccount(){return compteurAccount;}
 
-    public void openAccount(String number) {
+    public void openAccount(String number, float bonus) {
         boolean cherche = true;
         int i = 0;
         while (i < accounts.length & cherche) {
             //on verifie si il reste de la place dans le array
             //pour une nouvelle branche
             if (accounts[i] == null) {
-                accounts[i] = new BankAccount(number);
+                accounts[i] = new BankAccount(number, bonus);
                 cherche = false;
             } else {
-                i++;
-            }
+                i++;}
         }
         if (cherche == true) {
             BankAccount[] temp = accounts.clone();
@@ -37,32 +36,57 @@ public class Branch{
             for (i = 0; i < temp.length; i++) {
                 accounts[i] = temp[i];
             }
-            accounts[temp.length] = new BankAccount(number);
+            accounts[temp.length] = new BankAccount(number, bonus);
         }
         compteurAccount++;
     }
     public void closeAccount(String number){
-        for (int i = 0; i < compteurAccount; i++) {
+        boolean cherche = true;
+        int i = 0;
+        while (i < accounts.length & cherche) {
             //condition qui s'assure que le compte existe
-            if (number.equals(accounts[i].getNumber())) accounts[i].setStatus();
+            if (accounts[i]!=null){
+                if (number.equals(accounts[i].getNumber())) {
+                    accounts[i].setStatus();
+                    cherche=false;}
+                else {i++;}
+            }
+            else {i++;}
         }
     }
+
     public static void verifyAccountDep(String number, float deposit){
-        for (int i = 0; i < compteurAccount; i++) {
+        boolean cherche=true;
+        int i=0;
+        while (i < accounts.length & cherche){
             //condition qui s'assure que le compte existe
-            if (number.equals(accounts[i].getNumber())){
-                if (accounts[i].getStatus() == true){
-                BankAccount.setDeposit(deposit);}
+            if (accounts[i]!=null) {
+                if (number.equals(accounts[i].getNumber())) {
+                    if (accounts[i].getStatus() == true) {
+                        BankAccount.setDeposit(deposit);
+                        cherche = false;
+                    }
+                }
+                else{i++;}
             }
+            else{i++;}
        }
     }
     public static void verifyAccountWith(String number, float withdraw){
-        for (int i = 0; i < compteurAccount; i++) {
+        boolean cherche=true;
+        int i=0;
+        while (i < accounts.length & cherche){
             //condition qui s'assure que le compte existe
-            if (number.equals(accounts[i].getNumber())){
-                if (accounts[i].getStatus() == true){
-                    BankAccount.setWithdraw(withdraw);}
+            if (accounts[i]!=null) {
+                if (number.equals(accounts[i].getNumber())) {
+                    if (accounts[i].getStatus() == true) {
+                        BankAccount.setWithdraw(withdraw);
+                        cherche = false;
+                    }
+                }
+                else{i++;}
             }
+            else{i++;}
         }
     }
     //TODO reportBranch
@@ -75,10 +99,10 @@ public class Branch{
         String report="### Branch "+transit+" ###\n";
         //boucle compte ferme et montant compte ferme
         for (int i=0; i<accounts.length; i++){
-            if (accounts[i].getStatus()==false) {
+            if (accounts[i].getStatus()==false & accounts[i]!=null) {
                 accountClose += 1;
                 totalCloseAccount+=accounts[i].getAmount();
-            } else {
+            } if (accounts[i].getStatus()==true & accounts[i]!=null) {
                 //boucle total compte ouvert et total montant compte ouvert
                 accountOpen +=1;
                 totalOpenAccount+=accounts[i].getAmount();
@@ -89,7 +113,8 @@ public class Branch{
         }
         report = report+ "    " + accountOpen + " active accounts.\n";
         report=report+reportBranch + "    Total deposits = " + totalOpenAccount + "$\n";
-        report=report+"    "+accountClose+ "closed accounts.\n"+"    Total closed accounts = "+totalCloseAccount+"$";
+        report=report+"    "+accountClose+ "closed accounts.\n"+"    Total closed accounts = "+totalCloseAccount+"$\n";
+        report=report+"####################\n";
         return report;
     }
 }
