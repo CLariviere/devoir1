@@ -1,3 +1,6 @@
+//Catherine Lariviere 0955948
+//2021-02-15
+
 public class BankAccount{
     //instance de comptes
 

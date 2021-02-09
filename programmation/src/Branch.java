@@ -1,3 +1,6 @@
+//Catherine Lariviere 0955948
+//2021-02-15
+
 public class Branch{
     //instances des succursales, gestion des comptes
 
@@ -31,6 +34,7 @@ public class Branch{
                 i++;}
         }
         if (cherche == true) {
+            //on cree un nouvel array plus grand
             BankAccount[] temp = accounts.clone();
             accounts = new BankAccount[accounts.length + 10];
             for (i = 0; i < temp.length; i++) {
@@ -62,6 +66,7 @@ public class Branch{
             //condition qui s'assure que le compte existe
             if (accounts[i]!=null) {
                 if (number.equals(accounts[i].getNumber())) {
+                    //verifie que le account est ouvert
                     if (accounts[i].getStatus() == true) {
                         BankAccount.setDeposit(deposit);
                         cherche = false;
@@ -79,6 +84,7 @@ public class Branch{
             //condition qui s'assure que le compte existe
             if (accounts[i]!=null) {
                 if (number.equals(accounts[i].getNumber())) {
+                    //verifie que le account est ouvert
                     if (accounts[i].getStatus() == true) {
                         BankAccount.setWithdraw(withdraw);
                         cherche = false;
@@ -89,7 +95,7 @@ public class Branch{
             else{i++;}
         }
     }
-    //TODO reportBranch
+    //TODO reportBranch, bug qui loop 3 fois?
     public String reportBranch(String transit){
         reportBranch="";
         int accountClose=0;

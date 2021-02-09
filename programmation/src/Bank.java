@@ -1,7 +1,9 @@
+//Catherine Lariviere 0955948
+//2021-02-15
+
 public class Bank {
     //attributs
     private Branch[] branches = new Branch[10];
-    private String report, shortReport;
     private float bonus;
 
     public void processTransaction(String line) {
@@ -27,7 +29,7 @@ public class Bank {
                 }
                 else {i++;}
             }
-            if (cherche==true & lineSplit[0].equals("build")) {
+            if (cherche & lineSplit[0].equals("build")) {
                 Branch[] temp = branches.clone();
                 branches = new Branch[branches.length+10];
                 for (i=0; i<temp.length;i++){
@@ -35,8 +37,7 @@ public class Bank {
                 }
                 branches[temp.length]=new Branch(transit);
                 }
-
-        };
+        }
 
         if (lineSplit[0].equals("open") || lineSplit[0].equals("close") ) {
             String transit = lineSplit[1];
@@ -52,9 +53,9 @@ public class Bank {
                     branches[i].closeAccount(number);
                     break;
                 }
-                i++;
+                else{i++;};
             }
-        };
+        }
 
         if (lineSplit[0].equals("deposit") || lineSplit[0].equals("withdraw")) {
             String transit = lineSplit[1];
@@ -63,33 +64,37 @@ public class Bank {
             int i=0;
             while (i < branches.length & cherche) {
                 //condition qui s'assure que la branche existe
-                if (transit.equals(branches[i].getTransit()) & lineSplit[0].equals("deposit")) {
-                    float deposit = Float.parseFloat(lineSplit[3]);
-                    Branch.verifyAccountDep(number, deposit);
-                    cherche=false;}
-                if (transit.equals(branches[i].getTransit()) & lineSplit[0].equals("withdraw")) {
-                    float withdraw = Float.parseFloat(lineSplit[3]);
-                    Branch.verifyAccountWith(number, withdraw);
-                    cherche=false;
+                if (branches[i]!=null){
+                    if (transit.equals(branches[i].getTransit()) & lineSplit[0].equals("deposit")) {
+                        float deposit = Float.parseFloat(lineSplit[3]);
+                        Branch.verifyAccountDep(number, deposit);
+                        cherche=false;}
+                    if (transit.equals(branches[i].getTransit()) & lineSplit[0].equals("withdraw")) {
+                        float withdraw = Float.parseFloat(lineSplit[3]);
+                        Branch.verifyAccountWith(number, withdraw);
+                        cherche=false;
+                    }
+                    else {i++;}
                 }
                 else {i++;}
             }
-        };
+        }
         if (lineSplit[0].equals("bonus")) {
             bonus = Float.parseFloat(lineSplit[1]);
-        };
+        }
         if (lineSplit[0].equals("report")) {
             //TODO ouvre 3 branches a la fois? boucle 3 fois sur branche?
-            report="+++ Bank Report +++\n";
+            String report = "+++ Bank Report +++\n";
             for (int i = 0; i < branches.length; i++) {
                 if (branches[i]!=null) {
-                    report=report+(branches[i].reportBranch(branches[i].getTransit()));
+                    report = report +(branches[i].reportBranch(branches[i].getTransit()));
                 }
             }
             System.out.println(report);
-        };
+        }
         if (lineSplit[0].equals("short")) {
-            //TODO creer fichier report
+            //TODO creer fichier shortReport
+            String shortReport="";
             System.out.println(shortReport);
         }
     }
