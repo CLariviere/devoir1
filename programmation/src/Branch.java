@@ -30,13 +30,14 @@ public class Branch{
                 cherche=false;
                 break;}
             if (accounts[i] == null) {
+                //on ouvre un account ds une place vide array
                 accounts[i] = new BankAccount(transit, number, bonus);
                 cherche = false;
             } else {
                 i++;}
         }
-        if (cherche == true) {
-            //on cree un nouvel array plus grand
+        if (cherche) {
+            //on cree un nouvel array plus grand, en copiant l'existant
             BankAccount[] temp = accounts.clone();
             accounts = new BankAccount[accounts.length + 10];
             for (i = 0; i < temp.length; i++) {
@@ -68,7 +69,7 @@ public class Branch{
             if (accounts[i]!=null) {
                 if (number.equals(accounts[i].getNumber())) {
                     //verifie que le account est ouvert
-                    if (accounts[i].getStatus() == true) {
+                    if (accounts[i].getStatus()) {
                         accounts[i].setDeposit(deposit);
                         totalDeposit+= deposit;
                         cherche = false;
@@ -87,7 +88,7 @@ public class Branch{
             if (accounts[i]!=null) {
                 if (number.equals(accounts[i].getNumber())) {
                     //verifie que le account est ouvert
-                    if (accounts[i].getStatus() == true) {
+                    if (accounts[i].getStatus()) {
                         accounts[i].setWithdraw(withdraw);
                         cherche = false;
                     }
@@ -101,7 +102,6 @@ public class Branch{
         reportBranch="";
         int accountClose=0;
         int accountOpen=0;
-        float totalOpenAccount=0;
         float totalCloseAccount=0;
         String report="### Branch "+transit+" ###\n";
         //boucle compte ferme et montant compte ferme
@@ -112,7 +112,6 @@ public class Branch{
             } if (accounts[i]!=null && accounts[i].getStatus()==true) {
                 //boucle total compte ouvert et total montant compte ouvert
                 accountOpen +=1;
-                totalOpenAccount+=accounts[i].getAmount();
                 reportBranch += "*** Account " + transit + ":" + accounts[i].getNumber() + "\n";
                 reportBranch += "    Balance = " + accounts[i].getAmount() + "$\n";
                 reportBranch += "    Last operation " + accounts[i].getLastOperation() + " " +
@@ -120,6 +119,7 @@ public class Branch{
                 totalDepositAccount+=accounts[i].getAmount();
             }
         }
+        //construction du report
         report += "    " + accountOpen + " active accounts.\n";
         report += reportBranch + "    Total deposits = " + totalDepositAccount + "$\n";
         report += "    " + accountClose + " closed accounts.\n" + "    Total closed accounts = "

@@ -32,6 +32,7 @@ public class BankAccount{
         status=false;
     }
     public  void setDeposit(float deposit) {
+        //empeche depot d'un montant negatif
         if (deposit>=0){
             amount+=deposit;
             lastOperationAmount=deposit;
@@ -40,6 +41,7 @@ public class BankAccount{
         }
     }
     public  void setWithdraw(float withdraw) {
+        //empeche retrait d'un trop gros montant ou un retrait d'un montant negatif
         if (amount>=withdraw && withdraw>0){
             amount-=withdraw;
             lastOperationAmount=withdraw;
