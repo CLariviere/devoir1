@@ -1,5 +1,6 @@
 //Catherine Lariviere 0955948
-//2021-02-15
+//Maha Faraj 20092708
+//2021-02-10
 
 public class Branch{
     //instances des succursales, gestion des comptes
